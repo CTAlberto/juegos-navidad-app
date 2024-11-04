@@ -17,6 +17,10 @@ Route::get('createUser', function(){
     return $user;
 });
 
+Route::get('game', function(){
+    return view('game');
+});
+
 Route::get('users', function(){
     return User::all();
 });
