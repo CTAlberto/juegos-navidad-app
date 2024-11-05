@@ -16,6 +16,12 @@ class User extends Model
         return $this->hasMany(Score::class);
     }
 
+    // Método para establecer la relación con la tabla de scores
+    public function score()
+    {
+        return $this->belongsTo(Score::class, 'score_id', 'id');
+    }
+
     // Método para establecer la relación con la tabla de game boards
     public function gameBoards()
     {

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'ipSeeker']);
 
+
 Route::get('createUser', function(){
     $user = new User;
     $user->name = 'Pollanko';
@@ -41,10 +42,18 @@ Route::get('users/{id}/{score}/update', function($id, $score){
     return $user;
 });
 
-Route::get('users/scores', function(){
-    $lista = User::where('score_id', '>', 1)->orderBy('score_id', 'desc')->get();
+//Route que se encargar de mostrar los 10 records mas altos de la tabla scores
+Route::get('scores', function(){
+    $lista = User::join('scores', 'users.score_id', '=', 'scores.id')
+                 ->orderBy('scores.points', 'desc')
+                 ->select('users.name', 'scores.points')
+                 ->take(10)
+                 ->get();
+    
     return $lista;
 });
+
+
 
 
 ?>
