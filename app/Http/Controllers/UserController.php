@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController
@@ -60,5 +60,12 @@ class UserController
     public function destroy(string $id)
     {
         //
+    }
+    public function ipSeeker(Request $request)
+    {
+        $ip = $request->ip();
+        $ipJson = response()->json(['ip' => $ip]);
+        echo $ipJson;
+        return view('landing');
     }
 }

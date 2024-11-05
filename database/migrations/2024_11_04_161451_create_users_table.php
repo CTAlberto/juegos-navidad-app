@@ -16,9 +16,10 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('score_id')->constrained();
+            $table->foreignId('score_id');
             $table->date('date');
             $table->string('email')->nullable();
+            $table->string('ip_adress')->unique();
             $table->timestamps();
         });
     }

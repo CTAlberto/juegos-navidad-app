@@ -2,11 +2,31 @@
 
 use App\Http\Controllers\UserController;
 use App\Models\User;
+use App\Models\Score;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [UserController::class, 'ipSeeker']);
+Route::get('/', function(){return view('landing');});
+Route::get('/check-ip', [UserController::class, 'checkIp']);
 
 
+Route::get('/ip', function(Request $request){
+    $user = User::where('ip_adress', $request->ip())->first();
+    if($user){
+        return $user;
+    }else{
+        $score = Score::create([
+            'points' => 0,
+        ]);
+        $user = User::create([
+            'ip_adress' => $request->ip(),
+            'date' => (new DateTime())->format('Y-m-d H:i:s'),
+            'name' => 'Anónimo',
+            'score_id' => $score->id,
+        ]);
+        return $user;
+    }
+});
 Route::get('createUser', function(){
     $user = new User;
     $user->name = 'Pollanko';
