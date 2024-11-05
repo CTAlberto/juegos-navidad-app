@@ -12,6 +12,7 @@ $title = 'XMas Game';
 </head>
 
 <body>
+    <h1>RAFA MARICOOOOOOOOOOOOOOOOOOOOOOOOOON!!!</h1>
 <div id="app">
     <form id="nameForm" name="nameForm">
         <input type="text" name="name" id="name" placeholder="Nombre">
