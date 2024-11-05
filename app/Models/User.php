@@ -9,6 +9,7 @@ class User extends Model
 {
     use HasFactory;
     protected $table = 'users';
+    protected $fillable = ['name', 'score_id', 'email', 'created_at', 'ip_adress', 'date'];
 
     // Método para establecer la relación con la tabla de scores
     public function scores()

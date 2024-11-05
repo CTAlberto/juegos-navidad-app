@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController
@@ -61,11 +61,26 @@ class UserController
     {
         //
     }
-    public function ipSeeker(Request $request)
+    public function checkIp(Request $request, $name)
     {
-        $ip = $request->ip();
-        $ipJson = response()->json(['ip' => $ip]);
-        echo $ipJson;
-        return view('landing');
+        // Obtener la IP del usuario
+        $ipAddress = $request->ip();
+
+        // Comprobar si hay un usuario con esta IP
+        $user = User::where('ip_address', $ipAddress)->first();
+
+        if ($user) {
+            // Si se encuentra un usuario con esa IP, devolver el nombre
+            return response()->json(['name' => $user->name, 'ip' => $ipAddress]);
+        } else {
+            // Si no se encuentra, crear un nuevo usuario con esa IP
+            // Puedes dejar el nombre en blanco o definirlo como quieras
+            User::create([
+                'ip_address' => $ipAddress,
+                'name' => $name ?? 'user'// O un valor por defecto, si lo prefieres
+            ])->save();
+
+            return response()->json(['name' => '']);
+        }
     }
 }
