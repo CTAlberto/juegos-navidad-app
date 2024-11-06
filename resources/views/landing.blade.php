@@ -17,7 +17,8 @@ $title = 'XMas Game';
 <form id="nameForm" name="nameForm" method="POST" action="{{ url('/check') }}">
     @csrf
     <label for="name">Nombre:</label>
-    <input type="text" name="name" id="name" value="" placeholder="{{ session('user_name') }}">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <input type="text" name="name" id="name" value="" placeholder="{{ session('user_name') }}" autocomplete="on">
     <button type="submit">Vamo a jugal</button>
 </form>
 
