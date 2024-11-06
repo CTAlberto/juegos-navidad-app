@@ -13,5 +13,3 @@ Route::get('/check', [UserController::class, 'index']);
 Route::get('game', [GameBoardController::class, 'game']);
 Route::post('game', [GameBoardController::class, 'game']);
 
-
-

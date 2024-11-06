@@ -9,31 +9,36 @@ $title = 'XMas Game';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <h1>RAFA MARICOOOOOOOOOOOOOOOOOOOOOOOOOON!!!</h1>
-<div id="app">
-<form id="nameForm" name="nameForm" method="GET" action="{{ url('/check') }}">
-    @csrf
-    <label for="name">Nombre:</label>
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    <input type="text" name="name" id="name" value="" placeholder="{{ session('user_name') }}" autocomplete="on">
-    <button type="submit">Vamo a jugal</button>
-</form>
+<body class="bg-gradient-to-r from-blue-900 via-purple-800 to-pink-700 min-h-screen flex items-center justify-center text-white">
+    <div class="container mx-auto p-6 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-pulse">RAFA MARICOOOOOOOOOOOOOOOOOOOOOOOOOON!!!</h1>
 
+        <div id="app" class="bg-white text-black rounded-lg shadow-lg p-6 max-w-md mx-auto">
+            <form id="nameForm" name="nameForm" method="GET" action="{{ url('/check') }}" class="space-y-4">
+                @csrf
+                <label for="name" class="block text-lg font-semibold">Nombre:</label>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="text" name="name" id="name" value="" placeholder="{{ session('user_name') }}"
+                    autocomplete="on"
+                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
 
+                <button type="submit"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition duration-300">
+                    Vamo a jugal
+                </button>
+            </form>
+        </div>
+    </div>
 
-</div>
-<div></div>
-<!-- Asegúrate de cargar jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    
-</script>
-<footer>
-    @include('footer')
-</footer>
+    <footer class="mt-8 text-center text-sm text-gray-200">
+        @include('footer')
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
+
 
 </html>
