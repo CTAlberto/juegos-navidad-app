@@ -37,8 +37,7 @@
     </script>
 
     <!-- Contenedor para Gameboard y Leaderboard (dos columnas) -->
-    <div class="grid grid-cols-3 md:grid-cols-2 gap-8 mt-8 px-4 mb-10">
-        <!-- Gameboard en la izquierda -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 px-4 mb-10">        <!-- Gameboard en la izquierda -->
         
         <div class="gameboard-container w-full h-full m-0 p-0">
             <x-gameboard />
