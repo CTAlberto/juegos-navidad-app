@@ -13,16 +13,15 @@ class UserController
      */
     public function index(Request $request)
 {
+    
+    // Buscar al usuario por IP
+    $user = User::where('ip_adress', $request->ip())->first();
+
     // Verificar si se ha enviado un nombre en el formulario
     $name = $request->input('name'); // Recibe el nombre desde el formulario
 
-    // Buscar al usuario por IP
-    $user = User::where('ip_adress', $request->ip())->first();
     
-    if($user){
-        session(['user_name' => $user->name, 'user_id' => $user->id]);
-        return view('landing');
-    }
+    
     if ($user && $name) {
         // Si el usuario existe, actualizamos el nombre
         $user->update(['name' => $name]);
@@ -52,6 +51,9 @@ class UserController
         return redirect('/game');
     }
 }
+    public function start(){
+        return view('landing');
+    }
 
 
 

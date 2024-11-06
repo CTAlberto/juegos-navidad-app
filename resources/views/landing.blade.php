@@ -14,10 +14,10 @@ $title = 'XMas Game';
 <body>
     <h1>RAFA MARICOOOOOOOOOOOOOOOOOOOOOOOOOON!!!</h1>
 <div id="app">
-<form id="nameForm" name="nameForm" method="POST" action="{{ url('/game') }}">
+<form id="nameForm" name="nameForm" method="POST" action="{{ url('/check') }}">
     @csrf
     <label for="name">Nombre:</label>
-    <input type="text" name="name" id="name" value="{{ session('user_name') }}" placeholder="{{ session('user_name') }}">
+    <input type="text" name="name" id="name" value="" placeholder="{{ session('user_name') }}">
     <button type="submit">Vamo a jugal</button>
 </form>
 
