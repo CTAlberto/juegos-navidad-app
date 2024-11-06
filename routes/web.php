@@ -6,15 +6,17 @@ use App\Models\Score;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){return view('landing');});
+Route::get('/', function () {
+    return view('landing');
+});
 Route::get('/check-ip', [UserController::class, 'checkIp']);
 
 
-Route::get('/ip', function(Request $request){
+Route::get('/ip', function (Request $request) {
     $user = User::where('ip_adress', $request->ip())->first();
-    if($user){
+    if ($user) {
         return $user;
-    }else{
+    } else {
         $score = Score::create([
             'points' => 0,
         ]);
@@ -27,7 +29,7 @@ Route::get('/ip', function(Request $request){
         return $user;
     }
 });
-Route::get('createUser', function(){
+Route::get('createUser', function () {
     $user = new User;
     $user->name = 'Pollanko';
     $user->score_id = 20000;
@@ -37,25 +39,25 @@ Route::get('createUser', function(){
     return $user;
 });
 
-Route::get('game', function(){
+Route::get('game', function () {
     return view('game');
 });
 
-Route::get('users', function(){
+Route::get('users', function () {
     return User::all();
 });
 
-Route::get('users/{id}', function($id){
+Route::get('users/{id}', function ($id) {
     return User::find($id);
 });
 
-Route::get('users/{id}/delete', function($id){
+Route::get('users/{id}/delete', function ($id) {
     $user = User::find($id);
     $user->delete();
     return view();
 });
 
-Route::get('users/{id}/{score}/update', function($id, $score){
+Route::get('users/{id}/{score}/update', function ($id, $score) {
     $user = User::find($id);
     $user->score_id = $score;
     $user->save();
@@ -63,18 +65,12 @@ Route::get('users/{id}/{score}/update', function($id, $score){
 });
 
 //Route que se encargar de mostrar los 10 records mas altos de la tabla scores
-Route::get('scores', function(){
+Route::get('scores', function () {
     $lista = User::join('scores', 'users.score_id', '=', 'scores.id')
-                 ->orderBy('scores.points', 'desc')
-                 ->select('users.name', 'scores.points')
-                 ->take(10)
-                 ->get();
-    
+        ->orderBy('scores.points', 'desc')
+        ->select('users.name', 'scores.points')
+        ->take(10)
+        ->get();
+
     return $lista;
 });
-
-
-
-
-?>
-

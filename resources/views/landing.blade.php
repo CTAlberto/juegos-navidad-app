@@ -41,6 +41,9 @@ $title = 'XMas Game';
         });
     });
 </script>
+<footer>
+    @include('footer')
+</footer>
 </body>
 
 </html>
