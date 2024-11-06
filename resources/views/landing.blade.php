@@ -14,32 +14,21 @@ $title = 'XMas Game';
 <body>
     <h1>RAFA MARICOOOOOOOOOOOOOOOOOOOOOOOOOON!!!</h1>
 <div id="app">
-    <form id="nameForm" name="nameForm">
-        <input type="text" name="name" id="name" placeholder="Nombre">
-        <button type="submit">Introduzca Nombre</button>
-    </form>
-</div>
+<form id="nameForm" name="nameForm" method="POST" action="{{ url('/game') }}">
+    @csrf
+    <label for="name">Nombre:</label>
+    <input type="text" name="name" id="name" value="{{ session('user_name') }}" placeholder="{{ session('user_name') }}">
+    <button type="submit">Vamo a jugal</button>
+</form>
 
+
+
+</div>
+<div></div>
 <!-- Asegúrate de cargar jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Hacer la solicitud AJAX cuando se cargue la página
-        $.ajax({
-            url: '/check-ip',
-            type: 'GET',
-            success: function(response) {
-                console.log(response);
-                // Si el nombre existe, actualizar el placeholder
-                if (response.name) {
-                    $('#name').attr('placeholder', response.name);
-                }
-            },
-            error: function(xhr) {
-                console.error("Error al comprobar la IP:", xhr.responseText);
-            }
-        });
-    });
+    
 </script>
 <footer>
     @include('footer')

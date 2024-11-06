@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <h1>ESTAMOS EN EL GAME</h1>
+    <p>{{session('user_name')}}</p>
 </body>
 </html>
