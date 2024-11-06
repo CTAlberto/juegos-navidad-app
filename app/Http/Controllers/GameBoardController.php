@@ -61,4 +61,8 @@ class GameBoardController
     {
         //
     }
+
+    public function game(){
+        return view('game');
+    }
 }

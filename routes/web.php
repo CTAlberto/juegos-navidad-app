@@ -1,14 +1,21 @@
 <?php
 
+use App\Http\Controllers\GameBoardController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Models\Score;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('landing');
-});
+// Ruta GET para la página de inicio (landing page)
+Route::get('/', [UserController::class, 'index']);
+
+// Ruta POST para procesar el formulario y luego redirigir al juego
+Route::post('/game', [UserController::class, 'index']); // Manejamos tanto GET como POST en la misma función
+Route::post('/game', [GameBoardController::class, 'game']); // Para la lógica del juego
+
+
+/*
 Route::get('/check-ip', [UserController::class, 'checkIp']);
 
 
@@ -73,4 +80,4 @@ Route::get('scores', function () {
         ->get();
 
     return $lista;
-});
+});*/

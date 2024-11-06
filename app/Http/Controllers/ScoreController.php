@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Score;
 use Illuminate\Http\Request;
 
 class ScoreController
@@ -17,9 +17,11 @@ class ScoreController
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($points)
     {
-        //
+        return Score::create([
+            'points' => $points,
+        ]);
     }
 
     /**
@@ -35,7 +37,7 @@ class ScoreController
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -60,5 +62,12 @@ class ScoreController
     public function destroy(string $id)
     {
         //
+    }
+
+    public function leaderboard(){
+
+        $scores = Score::orderBy('points', 'desc')->get();
+        return view('leaderboard', ['scores' => $scores]);
+        
     }
 }
