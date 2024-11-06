@@ -6,9 +6,12 @@ use App\Models\Score;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+//Route que se encarga de la vista principal(Langing)
 Route::get('/', function () {
     return view('landing');
 });
+
+
 Route::get('/check-ip', [UserController::class, 'checkIp']);
 
 
@@ -29,6 +32,8 @@ Route::get('/ip', function (Request $request) {
         return $user;
     }
 });
+
+//Route que se encarga de crear un usuario
 Route::get('createUser', function () {
     $user = new User;
     $user->name = 'Pollanko';
@@ -39,24 +44,29 @@ Route::get('createUser', function () {
     return $user;
 });
 
+//Route que se encarga de mostrar la vista del juego
 Route::get('game', function () {
     return view('game');
 });
 
+//Route que se encarga de mostrar todos los usuarios
 Route::get('users', function () {
     return User::all();
 });
 
+//Route que se encarga de mostrar un usuario
 Route::get('users/{id}', function ($id) {
     return User::find($id);
 });
 
+//Route que se encarga de eliminar un usuario
 Route::get('users/{id}/delete', function ($id) {
     $user = User::find($id);
     $user->delete();
     return view();
 });
 
+//Route que se encarga de actualizar el score de un usuario
 Route::get('users/{id}/{score}/update', function ($id, $score) {
     $user = User::find($id);
     $user->score_id = $score;
