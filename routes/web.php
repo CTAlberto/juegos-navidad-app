@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Route;
 // Ruta GET para la página de inicio (landing page)
 Route::get('/', [UserController::class, 'start']);
 Route::post('/check', [UserController::class, 'index']);
-Route::match(['get', 'post'], '/game', [GameBoardController::class, 'game']);
+Route::get('game', [GameBoardController::class, 'game']);
+Route::post('game', [GameBoardController::class, 'game']);
 
 
 
