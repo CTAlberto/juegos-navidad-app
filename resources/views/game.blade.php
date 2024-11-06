@@ -5,12 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        /* Puedes agregar más personalización si es necesario */
-    </style>
 </head>
 <body class="bg-gray-100">
-    <h1 class="text-center text-3xl mt-8">ESTAMOS EN EL GAME</h1>
     <p class="text-center mt-4">{{ session('user_name') }}</p>
     
     <!-- Botón para abrir el pop-up -->
@@ -41,14 +37,15 @@
     </script>
 
     <!-- Contenedor para Gameboard y Leaderboard (dos columnas) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 px-4">
+    <div class="grid grid-cols-3 md:grid-cols-2 gap-8 mt-8 px-4 mb-10">
         <!-- Gameboard en la izquierda -->
-        <div class="gameboard-container">
+        
+        <div class="gameboard-container w-full h-full m-0 p-0">
             <x-gameboard />
         </div>
 
         <!-- Leaderboard en la derecha -->
-        <div class="leaderboard-container">
+        <div class="leaderboard-container ">
             <x-leaderboard />
         </div>
     </div>
