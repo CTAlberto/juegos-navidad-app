@@ -6,7 +6,18 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        /* Puedes agregar más personalización si es necesario */
+        /* Agregamos z-index para asegurar que el leaderboard esté por encima */
+        .gameboard-container {
+            position: relative;  /* Necesario para que el z-index funcione */
+            z-index: 1;  /* Valor de z-index menor */
+            min-height: 100px;  /* Establecer una altura mínima para el div */
+        }
+
+        .leaderboard-container {
+            position: relative;  /* Necesario para que el z-index funcione */
+            z-index: 10;  /* Valor de z-index mayor, por lo que estará por encima */
+            min-height: 100px;  /* Establecer una altura mínima para el div */
+        }
     </style>
 </head>
 <body class="bg-gray-100">
