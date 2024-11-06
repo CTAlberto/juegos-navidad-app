@@ -66,8 +66,8 @@ class ScoreController
 
     public function leaderboard(){
 
-        $scores = Score::orderBy('points', 'desc')->get();
-        return view('leaderboard', ['scores' => $scores]);
+        $scores = Score::orderBy('points', 'desc')->limit(10)->get();
+        return $scores;
         
     }
 }

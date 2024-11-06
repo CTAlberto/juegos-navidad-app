@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\ScoreController;
 use Illuminate\Http\Request;
 
 class GameBoardController
@@ -63,6 +63,9 @@ class GameBoardController
     }
 
     public function game(){
+        $scoreController = new ScoreController();
+        $scores = $scoreController->leaderboard();
+        session(['scores' => $scores]);
         return view('game');
     }
 }
