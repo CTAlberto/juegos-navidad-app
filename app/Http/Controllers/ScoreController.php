@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Score;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ScoreController
@@ -66,8 +67,13 @@ class ScoreController
 
     public function leaderboard(){
 
-        $scores = Score::orderBy('points', 'desc')->limit(10)->get();
-        return $scores;
+        $results = DB::table('scores')
+        ->join('users', 'scores.id', '=', 'users.score_id')
+        ->select('scores.*', 'users.*')
+        ->orderBy('points', 'desc')->limit(10)
+        ->get();
+
+        return $results;
         
     }
 }
