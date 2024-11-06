@@ -14,7 +14,7 @@ $title = 'XMas Game';
 <body>
     <h1>RAFA MARICOOOOOOOOOOOOOOOOOOOOOOOOOON!!!</h1>
 <div id="app">
-<form id="nameForm" name="nameForm" method="POST" action="{{ url('/check') }}">
+<form id="nameForm" name="nameForm" method="GET" action="{{ url('/check') }}">
     @csrf
     <label for="name">Nombre:</label>
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
