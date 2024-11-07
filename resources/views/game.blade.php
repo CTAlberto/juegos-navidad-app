@@ -32,28 +32,40 @@
 
 <body class="min-h-screen bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 relative overflow-auto">
     <x-header />
-    <!-- Fondo animado de puntos que se mueven, ahora se coloca por encima de otros contenidos -->
+    <!-- Fondo animado de puntos que se mueven -->
     <div id="snow-container" class="absolute inset-0 z-20 pointer-events-none"></div>
-
-    <p class="text-center mt-4 text-white z-10 relative">{{ session('user_name') }}</p>
-
+    <!-- Botón para abrir el pop-up del leaderboard -->
+    <button onclick="openLeaderboardPopup()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 block mx-auto mt-8 z-10 relative">
+        Ver Leaderboard
+    </button>
     <!-- Botón para abrir el pop-up -->
-<button onclick="openPopup()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 block mx-auto mt-8 z-10 relative">
-    Indicaciones
-</button>
+    <button onclick="openPopup()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 block mx-auto mt-8 z-10 relative">
+        Indicaciones
+    </button>
 
-<!-- Contenedor del Pop-Up -->
-<div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[-1] hidden">
-    <div class="bg-white p-8 rounded shadow-lg w-1/3">
-        <h2 class="text-2xl font-semibold mb-4">¡¡¡El Grinch quiere arruinar la navidad!!!!</h2>
-        <p class="mb-6">¡¡¡El Grinch quiere arruinar la navidad!!!!</p>
-        <button onclick="closePopup()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-            Cerrar
-        </button>
+    <!-- Contenedor del Pop-Up -->
+    <div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[-1] hidden">
+        <div class="bg-white p-8 rounded shadow-lg w-1/3">
+            <h2 class="text-2xl font-semibold mb-4">¡¡¡El Grinch quiere arruinar la navidad!!!!</h2>
+            <p class="mb-6">¡¡¡El Grinch quiere arruinar la navidad!!!!</p>
+            <button onclick="closePopup()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                Cerrar
+            </button>
+        </div>
     </div>
-</div>
 
-
+    <!-- Contenedor del Pop-Up de Leaderboard -->
+    <div id="leaderboard-popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[-1] hidden">
+        <div class="bg-inherit p-8 rounded shadow-lg w-1/3">
+            <div id="leaderboard-content">
+                <!-- Aquí puedes incluir el contenido del leaderboard -->
+                <x-leaderboard />
+            </div>
+            <button onclick="closeLeaderboardPopup()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                Cerrar
+            </button>
+        </div>
+    </div>
 
     <!-- Script JavaScript para manejar el Pop-Up -->
     <script>
@@ -66,8 +78,19 @@
     function closePopup() {
         const popup = document.getElementById('popup');
         popup.classList.add('hidden');     // Oculta el popup nuevamente
-        popup.classList.remove('z-50');    // Remueve el z-index alto para restaurar su estado inicial
-    }
+        popup.classList.remove('z-50');    // Remueve el z-index alto para restaurar su estado inicial
+    }
+        function openLeaderboardPopup() {
+            const popup = document.getElementById('leaderboard-popup');
+            popup.classList.remove('hidden'); // Muestra el popup
+            popup.classList.add('z-50'); // Cambia el z-index para estar sobre otros elementos
+        }
+
+        function closeLeaderboardPopup() {
+            const popup = document.getElementById('leaderboard-popup');
+            popup.classList.add('hidden'); // Oculta el popup nuevamente
+            popup.classList.remove('z-50'); // Remueve el z-index alto para restaurar su estado inicial
+        }
 
         // Función para generar nieve (puntos aleatorios)
         function createSnowflakes() {
@@ -102,16 +125,10 @@
         window.onload = createSnowflakes;
     </script>
 
-    <!-- Contenedor para Gameboard y Leaderboard (dos columnas) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 px-4 mb-10 z-10 relative">
-        <!-- Gameboard en la izquierda -->
-        <div class="gameboard-container w-full h-full m-0 p-0">
+    <!-- Contenedor para Gameboard que ocupe el 75% de la pantalla y esté centrado -->
+    <div class="flex justify-center items-center h-screen">
+        <div class="gameboard-container w-3/5 h-3/5">
             <x-gameboard />
-        </div>
-
-        <!-- Leaderboard en la derecha -->
-        <div class="leaderboard-container">
-            <x-leaderboard />
         </div>
     </div>
 
