@@ -66,11 +66,33 @@ class GrinchController
 
     public function firstPositionGrinch($board){
         
-        $board = session('board');
         $board->grinch_position_x = rand(0, $board->size_x - 1);
         $board->grinch_position_y = rand(0, $board->size_y - 1);
         $board->save();
+    }
 
+    public function moveGrinch($board){
+
+        $direction = rand(0, 1) ? 'x' : 'y';
+        $move = rand(0, 1) ? 1 : -1;
+
+        switch ($direction) {
+            case 'x':
+                $board->grinch_position_x += $move;
+                break;
+            case 'y':
+                $board->grinch_position_y += $move;
+                break;
+        }
+        $board->save();
+    }
+
+    public function checkGrinch($board, $playerGuess){
+        if($board->grinch_position_x == $playerGuess['x'] && $board->grinch_position_y == $playerGuess['y']){
+            return true;
+        }
+        return false;
+        
     }
 
 }
