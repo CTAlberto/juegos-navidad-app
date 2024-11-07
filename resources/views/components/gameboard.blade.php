@@ -2,6 +2,7 @@
 $board = session('board');
 $grinchPositionX = session('grinch_position_x');
 $grinchPositionY = session('grinch_position_y');
+$chances = session('chances');
 echo $grinchPositionX;
 echo $grinchPositionY;
 ?>
@@ -21,6 +22,7 @@ echo $grinchPositionY;
     // Pasamos la posición del Grinch desde PHP a JavaScript
     let grinchPositionX = {{ $grinchPositionX }};
     let grinchPositionY = {{ $grinchPositionY }};
+    let chances = {{ $chances }};
     console.log(grinchPositionX, grinchPositionY);
     console.log(typeof grinchPositionX, typeof grinchPositionY);
     function checkCell(row, col) {
@@ -30,6 +32,11 @@ echo $grinchPositionY;
             alert('¡Encontraste al Grinch! 🎉' + row + " " + col);
         } else {
             alert("¡No has encontrado al Grinch! Intenta de nuevo." + row + " " + col);
+          
+            chances--;
+            if (chances <= 0) {
+                alert('¡Perdiste! 😢');
+            }
         }
     }
 </script>
