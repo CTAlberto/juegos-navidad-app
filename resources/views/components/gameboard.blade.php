@@ -1,7 +1,9 @@
 <?php
 $board = session('board');
-$grinchPositionX = session('grinchPosition_x');
-$grinchPositionY = session('grinchPosition_y');
+$grinchPositionX = session('grinch_position_x');
+$grinchPositionY = session('grinch_position_y');
+echo $grinchPositionX;
+echo $grinchPositionY;
 ?>
 <div class="grid gap-1 w-full h-full" style="grid-template-columns: repeat(<?= count($board) ?>, 25%);">
     @foreach($board as $row)
@@ -17,15 +19,17 @@ $grinchPositionY = session('grinchPosition_y');
 
 <script>
     // Pasamos la posición del Grinch desde PHP a JavaScript
-    const grinchPositionX = <?= json_encode($grinchPositionX) ?>;
-    const grinchPositionY = <?= json_encode($grinchPositionY) ?>;
-
+    let grinchPositionX = {{ $grinchPositionX }};
+    let grinchPositionY = {{ $grinchPositionY }};
+    console.log(grinchPositionX, grinchPositionY);
+    console.log(typeof grinchPositionX, typeof grinchPositionY);
     function checkCell(row, col) {
+
         // Comparamos la posición clicada con la posición del Grinch
-        if (row === grinchPositionX && col === grinchPositionY) {
-            alert('¡Encontraste al Grinch! 🎉');
+        if (row == grinchPositionY && col == grinchPositionX) {
+            alert('¡Encontraste al Grinch! 🎉' + row + " " + col);
         } else {
-            alert("¡No has encontrado al Grinch! Intenta de nuevo.");
+            alert("¡No has encontrado al Grinch! Intenta de nuevo." + row + " " + col);
         }
     }
 </script>
