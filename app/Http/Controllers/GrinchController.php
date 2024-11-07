@@ -61,11 +61,12 @@ class GrinchController
         //
     }
 
-    public function firstPositionGrinch($board){
+    public function firstPositionGrinch($size){
         
-        $board->grinch_position_x = rand(0, $board->size_x - 1);
-        $board->grinch_position_y = rand(0, $board->size_y - 1);
-        $board->save();
+        $grinchPosition_y = rand(0, $size - 1);
+        $grinchPosition_x = rand(0, $size - 1);
+        
+        return array('x' => $grinchPosition_x, 'y' => $grinchPosition_y);
     }
 
     public function moveGrinch($board){
@@ -92,7 +93,6 @@ class GrinchController
         return false;
         
     }
-
     public function traceGrinch($board){
         $trace = array();
         $trace['x'] = $board->grinch_position_x;
