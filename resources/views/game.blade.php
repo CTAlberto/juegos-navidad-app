@@ -31,7 +31,7 @@
 </head>
 
 <body class="min-h-screen bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 relative overflow-auto">
-
+    <x-header />
     <!-- Fondo animado de puntos que se mueven, ahora se coloca por encima de otros contenidos -->
     <div id="snow-container" class="absolute inset-0 z-20 pointer-events-none"></div>
 
