@@ -14,7 +14,7 @@ $title = 'XMas Game';
 
 <body class="bg-gradient-to-r from-blue-900 via-purple-800 to-pink-700 min-h-screen flex items-center justify-center text-white">
     <div class="container mx-auto p-6 text-center">
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-pulse">RAFA MARICOOOOOOOOOOOOOOOOOOOOOOOOOON!!!</h1>
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-pulse"> XMAS GAME!!!</h1>
 
         <div id="app" class="bg-white text-black rounded-lg shadow-lg p-6 max-w-md mx-auto">
             <form id="nameForm" name="nameForm" method="GET" action="{{ url('/check') }}" class="space-y-4">

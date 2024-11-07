@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Color;
 use Illuminate\Http\Request;
 
 class ColorController
@@ -61,4 +61,25 @@ class ColorController
     {
         //
     }
+
+    public function getRandomColor($num)
+    {
+        // Obtener un número limitado de colores de la base de datos
+        $colors = Color::limit($num+1)->get()->toArray();
+
+        // Seleccionar un color aleatorio de la lista
+        $randomColor = $colors[array_rand($colors)];
+
+        // Crear un array con el valor hexadecimal del color seleccionado
+        $color =['hex' => $randomColor['hex_value']];
+
+        return $color;
+
+    }
+    public function setBlackColor()
+    {
+        return ['hex' => '#000000'];
+
+}
+
 }

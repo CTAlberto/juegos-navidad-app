@@ -26,3 +26,7 @@ class Grinch extends Model
         return $this->belongsTo(GameBoard::class);
     }
 }
+
+/**
+ * es solo una prueba
+ */

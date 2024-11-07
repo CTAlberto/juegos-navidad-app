@@ -15,13 +15,13 @@ $scores = session('scores');
                 </tr>
             </thead>
             <tbody class="space-y-2">
-                @foreach ($scores as $index => $score)
-                    <tr class="border-b-2 border-gray-700 hover:bg-indigo-700 transition-all duration-300">
-                        <td class="py-3 px-6 text-lg text-pink-400">{{ $index + 1 }}</td>
-                        <td class="py-3 px-6 text-lg text-yellow-400">{{ $score->user->name ?? 'Anónimo' }}</td>
-                        <td class="py-3 px-6 text-lg text-teal-400">{{ $score->points }}</td>
-                    </tr>
-                @endforeach
+            @foreach ($scores as $index => $score)
+            <tr class="border-b-2 border-gray-700 hover:bg-indigo-700 transition-all duration-300">
+                <td class="py-3 px-6 text-lg text-pink-400">{{ $index + 1 }}</td>
+                <td class="py-3 px-6 text-lg text-yellow-400">{{ $score->name ?? 'Anónimo' }}</td>
+                <td class="py-3 px-6 text-lg text-teal-400">{{ $score->points }}</td>
+                </tr>
+            @endforeach        
             </tbody>
         </table>
     </div>
