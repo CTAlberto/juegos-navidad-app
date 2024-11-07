@@ -2,9 +2,9 @@
     <header class="bg-gray-800 text-white">
         <div class="container mx-auto flex justify-between items-center py-4 px-8">
             <p class="text-2xl font-bold">Grinch huntinng</p>
-            
+
             <span class="bg-gray-700 text-white px-3 py-1 rounded mr-4">10</span>
-            
+
             <div id="timer" class="bg-gray-700 text-white px-4 py-2 rounded text-lg">
                 <span id="time-display">00:00</span>
             </div>
@@ -13,16 +13,16 @@
             <button id="pause-button" onclick="togglePause()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-4">
                 Pausar
             </button>
-            <form> <!--Añadir el atributo action con la ruta de la petición POST-->
+            <form action="{{ url('game') }}" method="POST">
                 @csrf
-
-                <select name="difficulty" id="difficulty" class="bg-gray-700 text-white px-4 py-2 rounded">
+                <select name="difficulty" id="difficulty" class="bg-gray-700 text-white px-4 py-2 rounded" onchange="this.form.submit()">
                     <option value="">Selecciona la dificultad</option>
-                    <option value="easy">Fácil</option>
-                    <option value="medium">Medio</option>
-                    <option value="hard">Difícil</option>
+                    <option value="3">Fácil</option>
+                    <option value="4">Medio</option>
+                    <option value="5">Difícil</option>
                 </select>
             </form>
+
         </div>
     </header>
 </div>

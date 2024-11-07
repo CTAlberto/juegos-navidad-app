@@ -76,5 +76,10 @@ class ColorController
         return $color;
 
     }
+    public function setBlackColor()
+    {
+        return ['hex' => '#000000'];
+
+}
 
 }

@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
 use Illuminate\Http\Request;
-
 
 class GrinchController
 {
@@ -64,13 +61,43 @@ class GrinchController
         //
     }
 
-    public function firstPositionGrinch($board){
+    public function firstPositionGrinch($size){
         
-        $board = session('board');
-        $board->grinch_position_x = rand(0, $board->size_x - 1);
-        $board->grinch_position_y = rand(0, $board->size_y - 1);
-        $board->save();
+        $grinchPosition_y = rand(0, $size - 1);
+        $grinchPosition_x = rand(0, $size - 1);
+        
+        return array('x' => $grinchPosition_x, 'y' => $grinchPosition_y);
+    }
 
+    public function moveGrinch($board){
+
+        $direction = rand(0, 1) ? 'x' : 'y';
+        $move = rand(0, 1) ? 1 : -1;
+
+        switch ($direction) {
+            case 'x':
+                $board->grinch_position_x += $move;
+                break;
+            case 'y':
+                $board->grinch_position_y += $move;
+                break;
+        }
+        
+        $board->save();
+    }
+
+    public function checkGrinch($board, $playerGuess){
+        if($board->grinch_position_x == $playerGuess['x'] && $board->grinch_position_y == $playerGuess['y']){
+            return true;
+        }
+        return false;
+        
+    }
+    public function traceGrinch($board){
+        $trace = array();
+        $trace['x'] = $board->grinch_position_x;
+        $trace['y'] = $board->grinch_position_y;
+        return $trace;
     }
 
 }
