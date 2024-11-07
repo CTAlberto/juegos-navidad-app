@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
 use Illuminate\Http\Request;
-
 
 class GrinchController
 {
@@ -84,6 +81,7 @@ class GrinchController
                 $board->grinch_position_y += $move;
                 break;
         }
+        
         $board->save();
     }
 
@@ -93,6 +91,13 @@ class GrinchController
         }
         return false;
         
+    }
+
+    public function traceGrinch($board){
+        $trace = array();
+        $trace['x'] = $board->grinch_position_x;
+        $trace['y'] = $board->grinch_position_y;
+        return $trace;
     }
 
 }
