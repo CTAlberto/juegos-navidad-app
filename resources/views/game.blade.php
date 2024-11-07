@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,44 +22,52 @@
             0% {
                 transform: translate(var(--random-x), -100%);
             }
+
             100% {
                 transform: translate(var(--random-x), 100vh);
             }
         }
     </style>
 </head>
-<body class="min-h-screen bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 relative overflow-hidden">
+
+<body class="min-h-screen bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 relative overflow-auto">
 
     <!-- Fondo animado de puntos que se mueven, ahora se coloca por encima de otros contenidos -->
     <div id="snow-container" class="absolute inset-0 z-20 pointer-events-none"></div>
 
     <p class="text-center mt-4 text-white z-10 relative">{{ session('user_name') }}</p>
-    
-    <!-- Botón para abrir el pop-up -->
-    <button onclick="openPopup()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 block mx-auto mt-8 z-10 relative">
-        Indicaciones
-    </button>
 
-    <!-- Contenedor del Pop-Up -->
-    <div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-30 relative">
-        <div class="bg-white p-8 rounded shadow-lg w-1/3">
-            <h2 class="text-2xl font-semibold mb-4">¡¡¡El Grinch quiere arruinar la navidad!!!!</h2>
-            <p class="mb-6">¡¡¡El Grinch quiere arruinar la navidad!!!!</p>
-            <button onclick="closePopup()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                Cerrar
-            </button>
-        </div>
+    <!-- Botón para abrir el pop-up -->
+<button onclick="openPopup()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 block mx-auto mt-8 z-10 relative">
+    Indicaciones
+</button>
+
+<!-- Contenedor del Pop-Up -->
+<div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[-1] hidden">
+    <div class="bg-white p-8 rounded shadow-lg w-1/3">
+        <h2 class="text-2xl font-semibold mb-4">¡¡¡El Grinch quiere arruinar la navidad!!!!</h2>
+        <p class="mb-6">¡¡¡El Grinch quiere arruinar la navidad!!!!</p>
+        <button onclick="closePopup()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+            Cerrar
+        </button>
     </div>
+</div>
+
+
 
     <!-- Script JavaScript para manejar el Pop-Up -->
     <script>
         function openPopup() {
-            document.getElementById('popup').classList.remove('hidden');
-        }
+        const popup = document.getElementById('popup');
+        popup.classList.remove('hidden');  // Muestra el popup
+        popup.classList.add('z-50');       // Cambia el z-index a un valor más alto para estar sobre otros elementos
+    }
 
-        function closePopup() {
-            document.getElementById('popup').classList.add('hidden');
-        }
+    function closePopup() {
+        const popup = document.getElementById('popup');
+        popup.classList.add('hidden');     // Oculta el popup nuevamente
+        popup.classList.remove('z-50');    // Remueve el z-index alto para restaurar su estado inicial
+    }
 
         // Función para generar nieve (puntos aleatorios)
         function createSnowflakes() {
@@ -107,4 +116,5 @@
     </div>
 
 </body>
+
 </html>
