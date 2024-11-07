@@ -106,4 +106,24 @@ class GameBoardController
         session('size', $size);
         return 200;
     }
+    public function checkCell(Request $request)
+    {
+        $row = $request->input('row');
+        $col = $request->input('col');
+
+        // Supongamos que la posición del Grinch está guardada en la sesión.
+        $grinchPosition = session('grinchPosition'); // Ejemplo: ['row' => 2, 'col' => 3]
+
+        if ($grinchPosition && $grinchPosition['row'] == $row && $grinchPosition['col'] == $col) {
+            return response()->json([
+                'success' => true,
+                'message' => '¡Encontraste al Grinch! 🎉'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'No encontraste al Grinch. Sigue buscando.'
+        ]);
+    }
 }

@@ -42,7 +42,6 @@
     <button onclick="openPopup()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 block mx-auto mt-8 z-10 relative">
         Indicaciones
     </button>
-
     <!-- Contenedor del Pop-Up -->
     <div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[-1] hidden">
         <div class="bg-white p-8 rounded shadow-lg w-1/3">
@@ -78,6 +77,8 @@
     function closePopup() {
         const popup = document.getElementById('popup');
         popup.classList.add('hidden');     // Oculta el popup nuevamente
+        popup.classList.remove('z-50');    // Remueve el z-index alto para restaurar su estado inicial
+}
         popup.classList.remove('z-50');    // Remueve el z-index alto para restaurar su estado inicial}
         function openLeaderboardPopup() {
             const popup = document.getElementById('leaderboard-popup');

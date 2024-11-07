@@ -64,10 +64,12 @@ class GrinchController
 
     public function firstPositionGrinch($size)
     {
-
         $grinchPosition_y = rand(0, $size - 1);
         $grinchPosition_x = rand(0, $size - 1);
-
+        
+        session(['grinch_position_x' => $grinchPosition_x]);
+        session(['grinch_position_y' => $grinchPosition_y]);
+        
         return array('x' => $grinchPosition_x, 'y' => $grinchPosition_y);
     }
 
