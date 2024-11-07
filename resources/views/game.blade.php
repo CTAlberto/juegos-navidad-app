@@ -78,8 +78,7 @@
     function closePopup() {
         const popup = document.getElementById('popup');
         popup.classList.add('hidden');     // Oculta el popup nuevamente
-        popup.classList.remove('z-50');    // Remueve el z-index alto para restaurar su estado inicial
-    }
+        popup.classList.remove('z-50');    // Remueve el z-index alto para restaurar su estado inicial}
         function openLeaderboardPopup() {
             const popup = document.getElementById('leaderboard-popup');
             popup.classList.remove('hidden'); // Muestra el popup

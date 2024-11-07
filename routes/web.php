@@ -12,3 +12,4 @@ Route::get('/', [UserController::class, 'start']);
 Route::get('/check', [UserController::class, 'index']);
 Route::match(['post', 'get'], 'game', [GameBoardController::class, 'game']);
 Route::get('changeBoard/{id}', [GameBoardController::class, 'game']);
+    

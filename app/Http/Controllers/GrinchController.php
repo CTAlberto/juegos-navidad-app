@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 
 class GrinchController
@@ -61,43 +62,55 @@ class GrinchController
         //
     }
 
-    public function firstPositionGrinch($size){
-        
+    public function firstPositionGrinch($size)
+    {
+
         $grinchPosition_y = rand(0, $size - 1);
         $grinchPosition_x = rand(0, $size - 1);
-        
+
         return array('x' => $grinchPosition_x, 'y' => $grinchPosition_y);
     }
 
-    public function moveGrinch($board){
+    public function moveGrinch(Request $request)
+    {
+        $x = session('grinch_position_x');
+        $y = session('grinch_position_y');
+        $size = session('size');
+        $ok = true;
 
-        $direction = rand(0, 1) ? 'x' : 'y';
-        $move = rand(0, 1) ? 1 : -1;
+        do {
+            $dx = rand(-1, 1);
+            $dy = rand(-1, 1);
 
-        switch ($direction) {
-            case 'x':
-                $board->grinch_position_x += $move;
+            if ($dx === 0 && $dy === 0 || $dx !== 0 && $dy !== 0) {
+                continue;
+            }
+
+            $newX = $x + $dx;
+            $newY = $y + $dy;
+
+            if ($newX >= 0 && $newX < $size && $newY >= 0 && $newY < $size) {
+                $x = $newX;
+                $y = $newY;
+                $ok = false;
                 break;
-            case 'y':
-                $board->grinch_position_y += $move;
-                break;
-        }
-        
-        $board->save();
+            }
+        } while ($ok);
+        //Añadir la a la sesión la nueva posicion del grinch
     }
 
-    public function checkGrinch($board, $playerGuess){
-        if($board->grinch_position_x == $playerGuess['x'] && $board->grinch_position_y == $playerGuess['y']){
+    public function checkGrinch($board, $playerGuess)
+    {
+        if ($board->grinch_position_x == $playerGuess['x'] && $board->grinch_position_y == $playerGuess['y']) {
             return true;
         }
         return false;
-        
     }
-    public function traceGrinch($board){
+    public function traceGrinch($board)
+    {
         $trace = array();
         $trace['x'] = $board->grinch_position_x;
         $trace['y'] = $board->grinch_position_y;
         return $trace;
     }
-
 }

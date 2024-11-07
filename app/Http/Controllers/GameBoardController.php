@@ -103,6 +103,7 @@ class GameBoardController
             }
         }
         session(['board' => $board]);
+        session('size', $size);
         return 200;
     }
 }
