@@ -114,5 +114,5 @@ class GameBoardController
         session(['chances' => $chances]);
         return $chances;
     }
-   
+
 }

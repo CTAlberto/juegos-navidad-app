@@ -68,6 +68,10 @@
 
     <!-- Script JavaScript para manejar el Pop-Up -->
     <script>
+
+
+
+
         function openPopup() {
         const popup = document.getElementById('popup');
         popup.classList.remove('hidden');  // Muestra el popup
@@ -133,5 +137,4 @@
     </div>
 
 </body>
-
 </html>

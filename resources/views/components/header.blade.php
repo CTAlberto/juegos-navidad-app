@@ -3,7 +3,7 @@
         <div class="container mx-auto flex justify-between items-center py-4 px-8">
             <p class="text-2xl font-bold">Grinch huntinng</p>
 
-            <span class="bg-gray-700 text-white px-3 py-1 rounded mr-4">{{ session('chances') }}</span>
+            <span id="chances" class="bg-gray-700 text-white px-3 py-1 rounded mr-4"></span>
 
             <div id="timer" class="bg-gray-700 text-white px-4 py-2 rounded text-lg">
                 <span id="time-display">00:00</span>
