@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GameBoardController;
+use App\Http\Controllers\GrinchController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Models\Score;
@@ -13,3 +14,6 @@ Route::get('/check', [UserController::class, 'index']);
 Route::match(['post', 'get'], 'game', [GameBoardController::class, 'game']);
 Route::get('changeBoard/{id}', [GameBoardController::class, 'game']);
 Route::get('check-cell', [GameBoardController::class, 'checkCell']);
+Route::post('mover-grinch', [GrinchController::class, 'moveGrinch'])->name('mover-grinch');
+
+

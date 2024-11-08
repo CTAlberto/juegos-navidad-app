@@ -66,14 +66,14 @@ class GrinchController
     {
         $grinchPosition_y = rand(0, $size - 1);
         $grinchPosition_x = rand(0, $size - 1);
-        
+
         session(['grinch_position_x' => $grinchPosition_x]);
         session(['grinch_position_y' => $grinchPosition_y]);
-        
+
         return array('x' => $grinchPosition_x, 'y' => $grinchPosition_y);
     }
 
-    public function moveGrinch(Request $request)
+    public function moveGrinch123(Request $request)
     {
         $x = session('grinch_position_x');
         $y = session('grinch_position_y');
@@ -100,6 +100,44 @@ class GrinchController
         } while ($ok);
         //Añadir la a la sesión la nueva posicion del grinch
     }
+
+    // TuControlador.php
+    public function moveGrinch(Request $request)
+    {
+        $x = session('grinch_position_x');
+        $y = session('grinch_position_y');
+        $size = session('size');
+        $ok = true;
+
+        do {
+            $dx = rand(-1, 1);
+            $dy = rand(-1, 1);
+
+            if ($dx === 0 && $dy === 0 || $dx !== 0 && $dy !== 0) {
+                continue;
+            }
+
+            $newX = $x + $dx;
+            $newY = $y + $dy;
+
+            if ($newX >= 0 && $newX < $size && $newY >= 0 && $newY < $size) {
+                $x = $newX;
+                $y = $newY;
+                $ok = false;
+                break;
+            }
+        } while ($ok);
+
+        // Añadir la nueva posición a la sesión
+        session(['grinch_position_x' => $x, 'grinch_position_y' => $y]);
+
+        // Devuelve la nueva posición como JSON
+        return response()->json([
+            'x' => $x,
+            'y' => $y
+        ]);
+    }
+
 
     public function checkGrinch($board, $playerGuess)
     {
