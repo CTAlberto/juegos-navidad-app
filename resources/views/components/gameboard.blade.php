@@ -1,16 +1,20 @@
 <?php
 $board = session('board');
-$grinchPositionX = session('grinch_position_x');
-$grinchPositionY = session('grinch_position_y');
+$grinchPositionX = session('x');
+$grinchPositionY = session('y');
 $chances = 10;
 
 ?>
 <div id="gameboard" class="grid gap-1 w-full h-full" style="grid-template-columns: repeat(<?= count($board) ?>, 25%);">
     @foreach ($board as $row)
         @foreach ($row as $index => $color)
-            <div id="cell-{{ $loop->parent->index }}-{{ $index }}" class="color-cell w-full h-full p-4"
+            <!--<div id="cell-{{ $loop->parent->index }}-{{ $index }}" class="color-cell w-full h-full p-4"
                 style="background-color: <?= $color['hex'] ?>;"
                 onclick="checkCell({{ $loop->parent->index }}, {{ $index }})">
+            </div>-->
+            <div id="cell-{{ $loop->parent->index }}-{{ $index }}" class="color-cell w-full h-full p-4"
+                style="background-color: <?= $color['hex'] ?>;"
+                onclick="moverGrinch()"><button class="btn" id="btn">Mover Grinch</button>
             </div>
         @endforeach
     @endforeach
@@ -41,34 +45,42 @@ $chances = 10;
 }
 
 function moverGrinch() {
-    fetch('{{ url('/mover-grinch') }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Token CSRF
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Nueva posición del Grinch:', data);
+    $('.btn').click(function(){
+            $.ajax({
+                url: '{{ url('game/mover-grinch') }}',
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response){
+                    console.log(response);
+
+                    $('#cell-'+response.x+response.y).css('background-color', '#000000');
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    $('#result').html('<p>Error al obtener los datos.</p>');
+                }
+            })
+        })
+
 
         // Remover el color especial de la posición anterior del Grinch
-        const prevGrinchCell = document.getElementById(`cell-${grinchPositionY}-${grinchPositionX}`);
-        if (prevGrinchCell) {
-            prevGrinchCell.style.outline = 'none';
-        }
+        //const prevGrinchCell = document.getElementById(`cell-${grinchPositionY}-${grinchPositionX}`);
+        //if (prevGrinchCell) {
+        //    prevGrinchCell.style.outline = 'none';
+        //}
 
         // Actualizar las variables de posición del Grinch con los nuevos valores
-        grinchPositionX = data.x;
-        grinchPositionY = data.y;
+        //grinchPositionX = data.x;
+        //grinchPositionY = data.y;
 
         // Agregar un color especial a la nueva posición del Grinch
-        const newGrinchCell = document.getElementById(`cell-${grinchPositionY}-${grinchPositionX}`);
-        if (newGrinchCell) {
-            newGrinchCell.style.outline = '3px solid red';
-        }
-    })
-    .catch(error => console.error('Error al mover el Grinch:', error));
+        //const newGrinchCell = document.getElementById(`cell-${grinchPositionY}-${grinchPositionX}`);
+        //if (newGrinchCell) {
+        //    newGrinchCell.style.outline = '3px solid red';
+        //}
+
 }
 
 

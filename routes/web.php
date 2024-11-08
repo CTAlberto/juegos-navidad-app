@@ -14,6 +14,40 @@ Route::get('/check', [UserController::class, 'index']);
 Route::match(['post', 'get'], 'game', [GameBoardController::class, 'game']);
 Route::get('changeBoard/{id}', [GameBoardController::class, 'game']);
 Route::get('check-cell', [GameBoardController::class, 'checkCell']);
-Route::post('mover-grinch', [GrinchController::class, 'moveGrinch'])->name('mover-grinch');
+//Route::get('game/mover-grinch', [GrinchController::class, 'moveGrinch']);
+Route::get('game/mover-grinch', function ()
+{
+    $x = session('x');
+    $y = session('y');
+    $size = session('size');
+    $ok = true;
 
+    do {
+        $dx = rand(-1, 1);
+        $dy = rand(-1, 1);
+
+        if ($dx === 0 && $dy === 0 || $dx !== 0 && $dy !== 0) {
+            continue;
+        }
+
+        $newX = $x + $dx;
+        $newY = $y + $dy;
+
+        if ($newX >= 0 && $newX < $size && $newY >= 0 && $newY < $size) {
+            $x = $newX;
+            $y = $newY;
+            $ok = false;
+            break;
+        }
+    } while ($ok);
+
+    // Añadir la nueva posición a la sesión
+    session(['x' => $x, 'y' => $y]);
+
+    // Devuelve la nueva posición como JSON
+    return response()->json([
+        'x' => $x,
+        'y' => $y
+    ]);
+});
 
